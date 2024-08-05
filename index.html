@@ -8,7 +8,8 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
         body {
-            font-family: 'Hack', 'Fira Code', 'Source Code Pro', 'JetBrains Mono', 'Inconsolata', 'Ubuntu Mono', 'Consolas', monospace;            background-color: #121212;
+            font-family: 'Hack', 'Fira Code', 'Source Code Pro', 'JetBrains Mono', 'Inconsolata', 'Ubuntu Mono', 'Consolas', monospace;
+            background-color: #121212;
             color: #e0e0e0;
             line-height: 1.6;
             padding: 20px;
@@ -32,7 +33,6 @@
             font-size: 2.5em;
             margin-bottom: 10px;
             color: #4ade80;
-            margin-top: auto;
         }
 
         .description {
@@ -50,11 +50,12 @@
         }
 
         .command:hover {
-            background-color: #1a422d;
+            background-color: #367956;
         }
 
         .command h2 {
             font-size: 1.2em;
+            color: #36ff80;
             margin-top: 0;
         }
 
@@ -76,6 +77,25 @@
         a:hover {
             text-decoration: underline;
         }
+
+        .download-button {
+            display: block;
+            width: 200px;
+            padding: 10px;
+            margin: 20px auto;
+            text-align: center;
+            background-color: #2fe471;
+            color: #121212;
+            border: none;
+            border-radius: 7px;
+            font-size: 0.9em;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .download-button:hover {
+            background-color: #36b76b;
+        }
     </style>
 </head>
 
@@ -88,8 +108,9 @@
                 vulnerability scanning, and more. Use these commands responsibly on systems you have explicit permission
                 to test.</p>
             <p>Find the complete source code and more resources on my <a
-                    href="https://github.com/your-github-username/bug-bounty-command-arsenal" target="_blank">GitHub
+                    href="https://github.com/JeninSutradhar/bug-bounty-command-arsenal" target="_blank">GitHub
                     repository</a>.</p>
+            <a href="https://raw.githubusercontent.com/JeninSutradhar/bug-bounty-command-arsenal/main/commands.txt" class="download-button" download>Download Command List</a>
         </header>
 
         <main id="commandList"></main>
@@ -203,7 +224,6 @@
             { id: 99, command: "netdiscover -r 192.168.1.0/24", description: "Discovers live hosts on a local network.", uses: "To identify devices and their IP addresses within a subnet." },
             { id: 100, command: "fping -a -g 192.168.1.0/24", description: "Ping sweep to identify live hosts in a subnet.", uses: "To find active IP addresses within a specified network range." }
         ];
-
 
         function renderCommands() {
             const mainElement = document.getElementById('commandList');
