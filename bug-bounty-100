@@ -1,0 +1,499 @@
+1. whois target.com
+
+    Description: Queries the Whois database for domain registration details.
+    Uses: To obtain domain registration information, including owner details, registration dates, and contact information.
+
+2. nslookup target.com
+
+    Description: Queries DNS records for a domain.
+    Uses: To retrieve IP addresses associated with the domain or other DNS records.
+
+3. dig target.com
+
+    Description: Performs DNS lookups and provides detailed DNS query information.
+    Uses: To obtain detailed DNS records, including A, AAAA, MX, and NS records.
+
+4. host -t ns target.com
+
+    Description: Retrieves nameserver (NS) records for a domain.
+    Uses: To find the authoritative nameservers for the domain.
+
+5. host -t mx target.com
+
+    Description: Retrieves mail exchange (MX) records for a domain.
+    Uses: To identify mail servers for the domain.
+
+6. sublist3r -d target.com
+
+    Description: Uses various sources to enumerate subdomains of a domain.
+    Uses: To discover subdomains for further enumeration and testing.
+
+7. amass enum -d target.com
+
+    Description: Enumerates subdomains using various techniques and sources.
+    Uses: To gather a comprehensive list of subdomains.
+
+8. assetfinder --sub-only target.com
+
+    Description: Finds subdomains of a given domain using various sources.
+    Uses: To discover subdomains that may not be identified through other tools.
+
+9. findomain -t target.com
+
+    Description: Discovers subdomains of a domain.
+    Uses: To find hidden or less obvious subdomains.
+
+10. massdns -r resolvers.txt -t A -o S -w results.txt subdomains.txt
+
+    Description: Resolves subdomains to IP addresses using a list of DNS resolvers.
+    Uses: To map discovered subdomains to their IP addresses.
+
+11. httprobe < subdomains.txt > live_subdomains.txt
+
+    Description: Checks which subdomains are live by probing them for HTTP services.
+    Uses: To filter out non-responsive subdomains and focus on active ones.
+
+12. httpx -l subdomains.txt -o live_hosts.txt
+
+    Description: Identifies live hosts from a list of subdomains by sending HTTP requests.
+    Uses: To verify which subdomains are actively serving web content.
+
+13. httpx -iL live_hosts.txt -o nmapurls.txt
+
+    Description: Sends HTTP requests to live hosts and saves URLs for further scanning.
+    Uses: To prepare URLs for detailed scanning with tools like Nmap.
+
+14. whatweb -i live_hosts.txt
+
+    Description: Identifies web technologies used by hosts.
+    Uses: To detect technology stacks and potentially vulnerable components on web servers.
+
+15. aquatone-discover -d target.com
+
+    Description: Discovers subdomains and provides a visual interface for them.
+    Uses: To visualize and further investigate subdomains.
+
+16. waybackurls target.com | tee waybackurls.txt
+
+    Description: Retrieves URLs from the Wayback Machine archive for a domain.
+    Uses: To find historical URLs that may expose hidden endpoints or content.
+
+17. gau target.com | tee gau_urls.txt
+
+    Description: Retrieves URLs from various sources, including the Wayback Machine and Common Crawl.
+    Uses: To compile a list of URLs for further analysis.
+
+18. hakrawler -url target.com -depth 2 -plain | tee hakrawler_output.txt
+
+    Description: Crawls a website and extracts links up to a specified depth.
+    Uses: To gather and analyze all links within a certain depth from the root URL.
+
+19. github-search target.com
+
+    Description: Searches GitHub for repositories related to the domain.
+    Uses: To find potentially exposed source code or configuration files.
+
+20. gitrob -repo target.com
+
+    Description: Analyzes GitHub repositories for sensitive information.
+    Uses: To identify potentially sensitive data in public repositories.
+
+21. fierce --domain target.com
+
+    Description: DNS reconnaissance tool to identify subdomains and other DNS records.
+    Uses: To enumerate subdomains and DNS records for further analysis.
+
+22. dirsearch -u target.com -e *
+
+    Description: Performs directory and file brute-forcing on a web server.
+    Uses: To find hidden directories and files.
+
+23. ffuf -w wordlist.txt -u https://target.com/FUZZ
+
+    Description: Fuzzes URLs for directories and files using a wordlist.
+    Uses: To discover hidden resources on a web server.
+
+24. gowitness file -f live_hosts.txt -P screenshots/
+
+    Description: Takes screenshots of live hosts.
+    Uses: To visually inspect the appearance of live web pages.
+
+25. nuclei -l live_hosts.txt -t templates/
+
+    Description: Runs Nuclei templates against live hosts for vulnerabilities.
+    Uses: To perform vulnerability scanning based on predefined templates.
+
+26. metabigor net --org target.com
+
+    Description: Identifies digital assets and metadata related to an organization.
+    Uses: To gather detailed information about an organization’s infrastructure.
+
+27. metagoofil -d target.com -t doc,pdf,xls,docx,xlsx,ppt,pptx -l 100
+
+    Description: Extracts metadata from documents related to a domain.
+    Uses: To find sensitive information within document files.
+
+28. theharvester -d target.com -l 500 -b all
+
+    Description: Collects information from various public sources.
+    Uses: To aggregate information such as email addresses, subdomains, and more.
+
+29. dnsenum target.com
+
+    Description: Performs DNS enumeration to discover subdomains and other DNS records.
+    Uses: To enumerate DNS information and discover potential attack vectors.
+
+30. dnsrecon -d target.com
+
+    Description: Performs DNS reconnaissance and enumeration.
+    Uses: To gather detailed DNS records and identify subdomains.
+
+31. shodan search hostname:target.com
+
+    Description: Searches Shodan for devices associated with a hostname.
+    Uses: To find internet-connected devices and their details.
+
+32. censys search target.com
+
+    Description: Searches Censys for information about a domain.
+    Uses: To find details about devices and certificates associated with the domain.
+
+33. spiderfoot -s target.com -o spiderfoot_report.html
+
+    Description: Performs automated reconnaissance and generates a report.
+    Uses: To get a comprehensive overview of the target’s digital footprint.
+
+34. sniper -t target.com
+
+    Description: Automated reconnaissance tool for various data collection tasks.
+    Uses: To perform in-depth reconnaissance and gather a wide range of information.
+
+35. subfinder -d target.com -o subfinder_results.txt
+
+    Description: Finds subdomains of a domain.
+    Uses: To identify subdomains for further analysis and testing.
+
+36. wafwoof target.com
+
+    Description: Detects the presence of a web application firewall (WAF).
+    Uses: To identify if a WAF is protecting the target site.
+
+37. arjun -u https://target.com -oT arjun_output.txt
+
+    Description: Parameter discovery tool for web applications.
+    Uses: To identify and enumerate parameters in web applications.
+
+38. subjack -w subdomains.txt -t 20 -o subjack_results.txt
+
+    Description: Checks for subdomain takeover vulnerabilities.
+    Uses: To identify subdomains that may be vulnerable to takeover.
+
+39. meg -d 1000 -v /path/to/live_subdomains.txt
+
+    Description: Performs directory brute-forcing on live subdomains.
+    Uses: To find hidden directories and files on subdomains.
+
+40. waymore -u target.com -o waymore_results.txt
+
+    Description: Extends Wayback Machine data to find more historical URLs.
+    Uses: To gather additional historical data and URLs.
+
+41. unfurl -u target.com -o unfurl_results.txt
+
+    Description: Extracts and analyzes URLs from a web domain.
+    Uses: To gather and analyze URLs for further testing.
+
+42. dalfox file live_hosts.txt
+
+    Description: Performs XSS vulnerability scanning on live hosts.
+    Uses: To identify potential XSS vulnerabilities in web applications.
+
+43. gospider -S live_hosts.txt -o gospider_output/
+
+    Description: Crawls web applications to find URLs and resources.
+    Uses: To discover additional URLs and resources within web applications.
+
+44. recon-ng -w workspace -t target.com
+
+    Description: Framework for gathering open-source intelligence.
+    Uses: To collect and analyze information about the target domain.
+
+45. xray webscan --basic-crawler http://target.com
+
+    Description: Performs a basic web scan and crawl.
+    Uses: To identify vulnerabilities and gather data from web applications.
+
+46. vhost -u target.com -o vhost_results.txt
+
+    Description: Finds virtual hosts for a domain.
+    Uses: To identify potential virtual hosts and related resources.
+
+47. gf xss | tee xss_params.txt
+
+    Description: Identifies potential XSS parameters using the gf tool.
+    Uses: To find parameters vulnerable to XSS attacks.
+
+48. gf sqli | tee sqli_payloads.txt
+
+    Description: Identifies potential SQLi payloads using the gf tool.
+    Uses: To find parameters vulnerable to SQL injection attacks.
+
+49. gf lfi | tee lfi_payloads.txt
+
+    Description: Identifies potential LFI payloads using the gf tool.
+    Uses: To find parameters vulnerable to Local File Inclusion attacks.
+
+50. gf ssrf | tee ssrf_payloads.txt
+
+    Description: Identifies potential SSRF payloads using the gf tool.
+    Uses: To find parameters vulnerable to Server-Side Request Forgery attacks.
+
+51. gf idor | tee idor_payloads.txt
+
+    Description: Identifies potential IDOR payloads using the gf tool.
+    Uses: To find parameters vulnerable to Insecure Direct Object References.
+
+52. gf ssti | tee ssti_payloads.txt
+
+    Description: Identifies potential SSTI payloads using the gf tool.
+    Uses: To find parameters vulnerable to Server-Side Template Injection attacks.
+
+53. git-secrets --scan
+
+    Description: Scans for sensitive information in Git repositories.
+    Uses: To identify secrets and sensitive data in version-controlled code.
+
+54. shuffledns -d target.com -list resolvers.txt -o shuffledns_results.txt
+
+    Description: Resolves subdomains using shuffled DNS resolvers.
+    Uses: To discover subdomains with the help of randomized DNS resolvers.
+
+55. dnsgen -f subdomains.txt | massdns -r resolvers.txt -t A -o S -w dnsgen_results.txt
+
+    Description: Generates DNS records from subdomains and resolves them.
+    Uses: To find additional DNS records for discovered subdomains.
+
+56. mapcidr -silent -cidr target.com -o mapcidr_results.txt
+
+    Description: Maps CIDR ranges to their respective IP addresses.
+    Uses: To enumerate IP addresses within specified CIDR ranges.
+
+57. tko-subs -domains=target.com -data=providers-data.csv
+
+    Description: Finds subdomains using a specified data provider.
+    Uses: To discover additional subdomains using external data sources.
+
+58. kiterunner -w wordlist.txt -u https://target.com
+
+    Description: Performs directory brute-forcing on a web application.
+    Uses: To find hidden directories and files within a web application.
+
+59. github-dorker -d target.com
+
+    Description: Searches for sensitive data using GitHub dorking.
+    Uses: To discover exposed sensitive information on GitHub.
+
+60. gfredirect -u target.com
+
+    Description: Finds open redirects using the gf tool.
+    Uses: To identify potential open redirect vulnerabilities.
+
+61. paramspider --domain target.com --output paramspider_output.txt
+
+    Description: Extracts parameters from a web domain.
+    Uses: To identify parameters in web applications for further testing.
+
+62. dirb https://target.com/ -o dirb_output.txt
+
+    Description: Performs directory brute-forcing on a web server.
+    Uses: To find hidden directories and files.
+
+63. wpscan --url target.com
+
+    Description: Scans a WordPress site for vulnerabilities.
+    Uses: To identify security issues in WordPress installations.
+
+64. cloud_enum -k target.com -l cloud_enum_output.txt
+
+    Description: Enumerates cloud infrastructure and services related to a domain.
+    Uses: To discover cloud-based assets and services.
+
+65. gobuster dns -d target.com -t 50 -w wordlist.txt
+
+    Description: Brute-forces DNS subdomains.
+    Uses: To discover hidden DNS subdomains.
+
+66. subzero -d target.com
+
+    Description: Discovers subdomains using multiple sources.
+    Uses: To identify subdomains from a variety of sources.
+
+67. dnswalk target.com
+
+    Description: Performs a walk-through of DNS records.
+    Uses: To enumerate and analyze DNS records.
+
+68. masscan -iL live_hosts.txt -p0-65535 -oX masscan_results.xml
+
+    Description: Scans all ports on live hosts.
+    Uses: To identify open ports across a range of IP addresses.
+
+69. xsstrike -u https://target.com/FUZZ
+
+    Description: Performs XSS vulnerability scanning with advanced techniques.
+    Uses: To identify and test for XSS vulnerabilities.
+
+70. dnsx -l subdomains.txt -resp-only -o dnsx_results.txt
+
+    Description: Resolves subdomains to IP addresses and outputs results.
+    Uses: To map subdomains to their corresponding IP addresses.
+
+71. waybackpack target.com -d output/
+
+    Description: Retrieves and analyzes Wayback Machine snapshots.
+    Uses: To gather historical data and URLs from archived web pages.
+
+72. puredns resolve subdomains.txt -r resolvers.txt -w puredns_results.txt
+
+    Description: Resolves subdomains using a list of resolvers.
+    Uses: To map subdomains to IP addresses.
+
+73. ctfr -d target.com -o ctfr_results.txt
+
+    Description: Finds and resolves CNAME records for a domain.
+    Uses: To discover additional DNS records and possible aliases.
+
+74. dnsvalidator -t 100 -f resolvers.txt -o validated_resolvers.txt
+
+    Description: Validates a list of DNS resolvers.
+    Uses: To ensure that DNS resolvers are functional and reliable.
+
+75. httpx -silent -l live_hosts.txt -mc 200 -o httpx_results.txt
+
+    Description: Checks HTTP responses for status code 200 on live hosts.
+    Uses: To confirm that hosts are responding with an HTTP 200 status.
+
+76. cloud_enum -k target.com -l cloud_enum_results.txt
+
+    Description: Enumerates cloud-related services and infrastructure.
+    Uses: To gather information on cloud-based assets and services.
+
+77. dirbuster -u https://target.com -w /path/to/wordlist.txt
+
+    Description: Performs directory and file brute-forcing on a web server.
+    Uses: To discover hidden directories and files.
+
+78. nmap -p- -T4 -A -v target.com
+
+    Description: Scans all ports on a target with aggressive detection.
+    Uses: To perform a comprehensive port scan and service detection.
+
+79. sqlmap -u "https://target.com/page?id=1" --dbs
+
+    Description: Detects and exploits SQL injection vulnerabilities.
+    Uses: To enumerate databases on a vulnerable application.
+
+80. screenshot-machine -u https://target.com -o screenshot.png
+
+    Description: Takes a screenshot of a web page.
+    Uses: To visually capture the content of a web page.
+
+81. nikto -h https://target.com
+
+    Description: Performs a web server vulnerability scan.
+    Uses: To identify potential vulnerabilities and misconfigurations.
+
+82. wpscan --enumerate u
+
+    Description: Enumerates users on a WordPress site.
+    Uses: To identify user accounts for further attacks.
+
+83. burpsuite --project-file project.burp
+
+    Description: Opens a Burp Suite project file.
+    Uses: To start a Burp Suite session with a saved project configuration.
+
+84. xsstrike -u https://target.com --crawl
+
+    Description: Crawls a website for XSS vulnerabilities.
+    Uses: To find and exploit potential XSS vulnerabilities.
+
+85. curl -I https://target.com
+
+    Description: Retrieves HTTP headers from a web server.
+    Uses: To gather information about the server’s response headers.
+
+86. recon-ng -w workspace -m recon/hosts/domains -o domains=target.com
+
+    Description: Collects domain-related information in a Recon-ng workspace.
+    Uses: To gather and manage reconnaissance data.
+
+87. nmap --script http-enum -p 80,443 target.com
+
+    Description: Uses Nmap's http-enum script to enumerate directories and files.
+    Uses: To find hidden directories and files on web servers.
+
+88. sqlmap -u "https://target.com/page?id=1" --tables
+
+    Description: Lists tables in a database if SQL injection is present.
+    Uses: To discover database tables for potential exploitation.
+
+89. whatweb -i https://target.com
+
+    Description: Identifies web technologies and services.
+    Uses: To detect technologies used by a web application.
+
+90. findsubdomains -d target.com -o subdomains.txt
+
+    Description: Finds subdomains of a given domain.
+    Uses: To discover additional subdomains.
+
+91. nmap -p 22,80,443 --open target.com
+
+    Description: Scans for open ports 22 (SSH), 80 (HTTP), and 443 (HTTPS).
+    Uses: To quickly check for common open ports.
+
+92. sublister -d target.com
+
+    Description: Enumerates subdomains of a domain.
+    Uses: To find additional subdomains.
+
+93. fuzzer -u https://target.com/FUZZ -w wordlist.txt
+
+    Description: Fuzzes URLs for potential vulnerabilities.
+    Uses: To identify hidden or sensitive resources.
+
+94. sslscan target.com
+
+    Description: Scans a server for SSL/TLS vulnerabilities.
+    Uses: To assess the security of SSL/TLS configurations.
+
+95. urlscan.io -u https://target.com
+
+    Description: Analyzes a URL for security and content.
+    Uses: To get a detailed analysis of a web page’s security posture.
+
+96. censys search "target.com"
+
+    Description: Searches Censys for information about the target domain.
+    Uses: To find exposed services and security issues.
+
+97. waybackurls target.com | grep -i login
+
+    Description: Searches Wayback Machine URLs for login pages.
+    Uses: To find potential login or admin pages from historical data.
+
+98. recon-ng -w workspace -m recon/hosts/hostnames -o hostnames=target.com
+
+    Description: Collects hostname-related information in a Recon-ng workspace.
+    Uses: To gather and manage hostname data.
+
+99. vulners -u https://target.com
+
+    Description: Scans a web application for known vulnerabilities.
+    Uses: To identify vulnerabilities based on the Vulners database.
+
+100. sublist3r -d target.com -o subdomains.txt
+
+    Description: Enumerates subdomains of a domain using various sources.
+    Uses: To gather a list of subdomains for further testing.
