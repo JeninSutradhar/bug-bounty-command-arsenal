@@ -297,7 +297,7 @@
     <div class="container">
         <header>
             <h1><i class="fas fa-terminal"></i> Bug Bounty Command Arsenal <i class="fas fa-shield-alt"></i></h1>
-            <p class="description">A meticulously curated and extensively detailed collection of 100+ essential commands
+            <p class="description">A meticulously curated and extensively detailed collection of essential commands
                 for ethical hacking, penetration testing, and bug bounty hunting. This arsenal is organized into
                 categories, covering a wide range of security testing phases from reconnaissance to vulnerability
                 exploitation. Each command is accompanied by a clear description, practical uses, and example scenarios
@@ -335,275 +335,259 @@
     <script>
         const commandList = [
             {
-                category: "Domain Information Gathering",
+                category: "Reconnaissance - Domain & Information Gathering",
                 commands: [
-                    { id: 1, command: "whois target.com", description: "Queries the Whois database for domain registration details.", uses: "To obtain domain registration information, including owner details, registration dates, and contact information." },
-                    { id: 2, command: "nslookup target.com", description: "Queries DNS records for a domain.", uses: "To retrieve IP addresses associated with the domain or other DNS records." },
-                    { id: 3, command: "dig target.com", description: "Queries DNS records for a domain using the Dig tool.", uses: "To retrieve detailed DNS information including A, AAAA, MX, and other records." },
-                    { id: 4, command: "host -t ns target.com", description: "Queries for the name servers of a domain.", uses: "To find out which name servers are authoritative for the domain." },
-                    { id: 5, command: "host -t mx target.com", description: "Queries for mail exchange servers of a domain.", uses: "To discover the mail servers associated with the domain." },
+                    { command: "whois target.com", description: "Queries the Whois database for domain registration details.", uses: "To obtain domain registration information." },
+                    { command: "nslookup target.com", description: "Queries DNS records for a domain.", uses: "To retrieve IP addresses associated with the domain." },
+                    { command: "dig target.com", description: "Queries DNS records for a domain using the Dig tool.", uses: "To retrieve detailed DNS information." },
+                    { command: "host -t ns target.com", description: "Queries for the name servers of a domain.", uses: "To find authoritative name servers." },
+                    { command: "host -t mx target.com", description: "Queries for mail exchange servers.", uses: "To discover mail servers." },
+                    { command: "theharvester -d target.com -l 500 -b all", description: "Gathers emails, subdomains, hosts, employee names, open ports and banners from different public sources.", uses: "Comprehensive passive information gathering." },
+                    { command: "metagoofil -d target.com -t doc,pdf,xls,docx,xlsx,ppt,pptx -l 100", description: "Extracts metadata from public documents.", uses: "To discover hidden information in file metadata." },
+                    { command: "nmap -sP 192.168.1.0/24", description: "Ping scan to discover live hosts on a network.", uses: "Quickly identify active devices on a network." },
+                    { command: "masscan 192.168.1.0/24 -p1-65535 --rate=1000", description: "Extremely fast port scanner, sends SYN packets without completing 3-way handshake.", uses: "Rapidly scan large networks or IP ranges for open ports." },
+                    { command: "shodan search target.com", description: "Searches Shodan for services and devices related to the domain.", uses: "To find publicly exposed services and vulnerabilities on the internet." }
                 ]
             },
             {
-                category: "Subdomain Enumeration",
+                category: "Reconnaissance - Subdomain Enumeration",
                 commands: [
-                    { id: 6, command: "sublist3r -d target.com", description: "Enumerates subdomains of a domain.", uses: "To discover additional subdomains of the target domain." },
-                    { id: 7, command: "amass enum -d target.com", description: "Performs enumeration of subdomains using Amass.", uses: "To discover subdomains through various sources and techniques." },
-                    { id: 8, command: "assetfinder --sub-only target.com", description: "Finds subdomains of a domain using Assetfinder.", uses: "To enumerate subdomains associated with the target domain." },
-                    { id: 9, command: "findomain -t target.com", description: "Finds subdomains for a domain using Findomain.", uses: "To identify subdomains for the target domain." },
-                    { id: 10, command: "massdns -r resolvers.txt -t A -o S -w results.txt subdomains.txt", description: "Performs DNS resolution for subdomains using MassDNS.", uses: "To resolve DNS records for a list of subdomains and output the results." },
-                    { id: 11, command: "httprobe < subdomains.txt > live_subdomains.txt", description: "Checks which subdomains are live using Httprobe.", uses: "To filter out non-responsive subdomains from a list." },
-                    { id: 12, command: "httpx -l subdomains.txt -o live_hosts.txt", description: "Checks live hosts from a list of subdomains using HTTPX.", uses: "To identify live web services from a list of subdomains." },
-                    { id: 13, command: "httpx -iL live_hosts.txt -o nmapurls.txt", description: "Checks HTTP responses and generates URLs for Nmap.", uses: "To prepare a list of URLs for further scanning with Nmap." },
-                    { id: 14, command: "whatweb -i live_hosts.txt", description: "Identifies web technologies used by live hosts.", uses: "To detect technologies and frameworks used on web servers." },
-                    { id: 15, command: "aquatone-discover -d target.com", description: "Finds subdomains and screenshots them using Aquatone.", uses: "To discover and visually inspect subdomains." },
-                    { id: 35, command: "subfinder -d target.com -o subfinder_results.txt", description: "Finds subdomains using Subfinder.", uses: "To enumerate subdomains of the target domain." },
-                    { id: 39, command: "meg -d 1000 -v /path/to/live_subdomains.txt", description: "Enumerates subdomains with Mega.", uses: "To discover subdomains and gather associated data." },
-                    { id: 40, command: "waymore -u target.com -o waymore_results.txt", description: "Finds additional subdomains using Waymore.", uses: "To discover more subdomains associated with the target domain." },
-                    { id: 54, command: "shuffledns -d target.com -list resolvers.txt -o shuffledns_results.txt", description: "Performs DNS resolution with shuffled DNS resolvers.", uses: "To discover subdomains and DNS records using various resolvers." },
-                    { id: 55, command: "dnsgen -f subdomains.txt | massdns -r resolvers.txt -t A -o S -w dnsgen_results.txt", description: "Generates DNS queries and resolves them using MassDNS.", uses: "To resolve domain names and find additional subdomains." },
-                    { id: 57, command: "tko-subs -domains=target.com -data=providers-data.csv", description: "Finds subdomains using TKOs.", uses: "To discover additional subdomains and related data." },
-                    { id: 66, command: "subzero -d target.com", description: "Finds subdomains using Subzero.", uses: "To enumerate additional subdomains." },
-                    { id: 98, command: "subdomain-scanner -d target.com", description: "Scans for subdomains using Subdomain Scanner.", uses: "To find additional subdomains associated with the target domain." },
+                    { command: "sublist3r -d target.com", description: "Enumerates subdomains of a domain.", uses: "Discovering subdomains." },
+                    { command: "amass enum -d target.com", description: "Performs enumeration of subdomains using Amass.", uses: "Extensive subdomain discovery through various sources." },
+                    { command: "assetfinder --subs-only target.com", description: "Finds subdomains using Assetfinder.", uses: "Quickly list subdomains." },
+                    { command: "findomain -t target.com", description: "Finds subdomains using Findomain.", uses: "Subdomain enumeration focused on speed." },
+                    { command: "crt.sh --wildcard %target.com", description: "Queries crt.sh for subdomains via SSL certificates.", uses: "Discovering subdomains listed in certificate transparency logs." },
+                    { command: "gobuster dns -d target.com -w subdomains.txt", description: "DNS subdomain brute-forcing with Gobuster.", uses: "Finding subdomains by brute-forcing a wordlist." },
+                    { command: "ffuf -w subdomains.txt -u http://FUZZ.target.com", description: "HTTP based subdomain brute-forcing with FFuF.", uses: "Web based subdomain discovery." },
+                    { command: "knockpy target.com", description: "Attempts DNS zone transfers and dictionary brute forcing.", uses: "DNS reconnaissance and subdomain discovery." },
+                    { command: "altDNS -i subdomains.txt -o altdns_output.txt -w words.txt", description: "Generates altered versions of subdomains to find new ones.", uses: "Discovering variations of known subdomains." },
+                    { command: "OneForAll --target target.com run", description: "Comprehensive subdomain enumeration tool.", uses: "All-in-one subdomain discovery with multiple engines." }
                 ]
             },
             {
-                category: "URL and Endpoint Discovery",
+                category: "Reconnaissance - URL & Endpoint Discovery",
                 commands: [
-                    { id: 16, command: "waybackurls target.com | tee waybackurls.txt", description: "Retrieves archived URLs from Wayback Machine.", uses: "To collect historical URLs for further analysis." },
-                    { id: 17, command: "gau target.com | tee gau_urls.txt", description: "Uses the Get-All-Urls tool to collect URLs from a target.", uses: "To gather URLs discovered from various sources." },
-                    { id: 18, command: "hakrawler -url target.com -depth 2 -plain | tee hakrawler_output.txt", description: "Crawls a website and extracts links using Hakrawler.", uses: "To find hidden links and endpoints on the target site." },
-                    { id: 22, command: "dirsearch -u target.com -e *", description: "Performs directory and file brute-forcing on a web server.", uses: "To find hidden directories and files on the target server." },
-                    { id: 23, command: "ffuf -w wordlist.txt -u https://target.com/FUZZ", description: "Fuzzes URLs to discover hidden resources.", uses: "To identify hidden endpoints and files using fuzzing." },
-                    { id: 41, command: "unfurl -u target.com -o unfurl_results.txt", description: "Extracts and analyzes URLs from a target domain.", uses: "To gather and analyze URLs for further examination." },
-                    { id: 43, command: "gospider -S live_hosts.txt -o gospider_output/", description: "Crawls and discovers endpoints using Gospider.", uses: "To find and analyze hidden endpoints and resources." },
-                    { id: 58, command: "kiterunner -w wordlist.txt -u https://target.com", description: "Fuzzes URLs with a wordlist using Kiterunner.", uses: "To discover hidden endpoints and resources on the target website." },
-                    { id: 62, command: "dirb https://target.com/ -o dirb_output.txt", description: "Performs directory brute-forcing using Dirb.", uses: "To find hidden directories and files on the target server." },
-                    { id: 77, command: "dirbuster -u https://target.com -w /path/to/wordlist.txt", description: "Performs directory and file brute-forcing on a web server.", uses: "To discover hidden directories and files." },
-                    { id: 92, command: "gobuster dir -u https://target.com -w /path/to/wordlist.txt", description: "Brute-forces directories and files using Gobuster.", uses: "To find hidden files and directories on the target website." },
+                    { command: "waybackurls target.com", description: "Retrieves archived URLs from Wayback Machine.", uses: "Collecting historical URLs for analysis." },
+                    { command: "gau target.com", description: "Uses Get-All-Urls to collect URLs from multiple sources.", uses: "Gathering URLs from various discovery methods." },
+                    { command: "hakrawler -url target.com -depth 3", description: "Crawls a website and extracts links.", uses: "Website crawling for link and endpoint extraction." },
+                    { command: "dirsearch -u target.com -e php,html,js", description: "Directory and file brute-forcing on a web server.", uses: "Finding hidden web directories and files." },
+                    { command: "ffuf -w paths.txt -u https://target.com/FUZZ", description: "Fuzzes for hidden directories and files.", uses: "Content discovery using wordlists." },
+                    { command: "katana -u target.com", description: "Next-generation crawler for finding administration panels and endpoints.", uses: "Advanced crawling and endpoint detection." },
+                    { command: "assetnote scope target.com", description: "Uses Assetnote's platform for endpoint discovery (requires API key).", uses: "Leveraging Assetnote for enhanced endpoint identification." },
+                    { command: "linkfinder -i https://target.com", description: "Discovers Javascript files and extracts endpoints from them.", uses: "Extracting endpoints from client-side Javascript code." },
+                    { command: "parameth -u https://target.com", description: "Fuzzing tool focused on discovering hidden parameters.", uses: "Parameter discovery for further testing." },
+                    { command: "Arjun -u https://target.com", description: "Parameter discovery suite.", uses: "Comprehensive URL parameter enumeration." }
                 ]
             },
             {
-                category: "Vulnerability Scanning & Analysis",
+                category: "Vulnerability Analysis - Web Scanning",
                 commands: [
-                    { id: 24, command: "gowitness file -f live_hosts.txt -P screenshots/", description: "Takes screenshots of live hosts.", uses: "To capture visual representations of live web services." },
-                    { id: 25, command: "nuclei -l live_hosts.txt -t templates/", description: "Scans live hosts for vulnerabilities using Nuclei templates.", uses: "To perform vulnerability scans on live web services." },
-                    { id: 42, command: "dalfox file live_hosts.txt", description: "Scans live hosts for XSS vulnerabilities using Dalfox.", uses: "To identify potential XSS vulnerabilities on live web services." },
-                    { id: 45, command: "xray webscan --basic-crawler http://target.com", description: "Scans a website for vulnerabilities using Xray.", uses: "To identify security issues on the target website." },
-                    { id: 69, command: "xsstrike -u https://target.com/FUZZ", description: "Fuzzes URLs to find XSS vulnerabilities using XSStrike.", uses: "To identify potential XSS vulnerabilities in web applications." },
-                    { id: 79, command: "sqlmap -u \"https://target.com/page?id=1\" --dbs", description: "Detects and exploits SQL injection vulnerabilities.", uses: "To enumerate databases on a vulnerable application." },
-                    { id: 81, command: "nikto -h https://target.com", description: "Performs a web server vulnerability scan.", uses: "To identify potential vulnerabilities and misconfigurations." },
-                    { id: 96, command: "fastjsonscan -u https://target.com", description: "Scans for JSON-related vulnerabilities.", uses: "To identify vulnerabilities related to JSON processing." },
-                    { id: 97, command: "sqli-labs --url https://target.com/page?id=1", description: "Tests for SQL injection vulnerabilities using SQLi Labs.", uses: "To check for SQL injection vulnerabilities in web applications." },
+                    { command: "nuclei -u target.com -t nuclei-templates/", description: "Scans for vulnerabilities using Nuclei templates.", uses: "Vulnerability scanning with a template-based engine." },
+                    { command: "nikto -h https://target.com", description: "Web server vulnerability scanner.", uses: "Basic web server vulnerability and misconfiguration scanning." },
+                    { command: "nmap -sV --script http-vuln target.com", description: "Nmap's NSE scripts for web vulnerability scanning.", uses: "Nmap-integrated web vulnerability checks." },
+                    { command: "wpscan --url target.com", description: "WordPress vulnerability scanner.", uses: "WordPress specific vulnerability and plugin/theme scanning." },
+                    { command: "joomscan --url target.com", description: "Joomla vulnerability scanner.", uses: "Joomla CMS security scanning." },
+                    { command: "skipfish -o skipfish_report https://target.com", description: "Active web application security reconnaissance tool.", uses: "Fast crawling and vulnerability fingerprinting." },
+                    { command: "burpsuite", description: "Starts Burp Suite, a comprehensive web penetration testing tool.", uses: "Manual web application security testing and proxy." },
+                    { command: "zap-webswing", description: "Starts OWASP ZAP, an open-source web application security scanner.", uses: "Automated web application vulnerability scanning and proxy." },
+                    { command: " Nessus", description: "Starts Nessus vulnerability scanner (if installed).", uses: "Comprehensive vulnerability scanning for infrastructure and web." },
+                    { command: "OpenVAS", description: "Starts OpenVAS, another open-source vulnerability scanner suite.", uses: "Broad vulnerability assessment including web applications." }
                 ]
             },
             {
-                category: "Parameter and Payload Fuzzing",
+                category: "Vulnerability Analysis - Specialized Scanners",
                 commands: [
-                    { id: 37, command: "arjun -u https://target.com -oT arjun_output.txt", description: "Finds parameters and potential vulnerabilities using Arjun.", uses: "To identify and test parameters for vulnerabilities." },
-                    { id: 47, command: "gf xss | tee xss_params.txt", description: "Finds potential XSS parameters using GF.", uses: "To identify parameters vulnerable to XSS attacks." },
-                    { id: 48, command: "gf sqli | tee sqli_payloads.txt", description: "Finds potential SQL injection payloads using GF.", uses: "To identify parameters vulnerable to SQL injection." },
-                    { id: 49, command: "gf lfi | tee lfi_payloads.txt", description: "Finds potential Local File Inclusion (LFI) payloads using GF.", uses: "To identify parameters vulnerable to LFI attacks." },
-                    { id: 50, command: "gf ssrf | tee ssrf_payloads.txt", description: "Finds potential Server-Side Request Forgery (SSRF) payloads using GF.", uses: "To identify parameters vulnerable to SSRF attacks." },
-                    { id: 51, command: "gf idor | tee idor_payloads.txt", description: "Finds potential Insecure Direct Object Reference (IDOR) payloads using GF.", uses: "To identify parameters vulnerable to IDOR attacks." },
-                    { id: 52, command: "gf ssti | tee ssti_payloads.txt", description: "Finds potential Server-Side Template Injection (SSTI) payloads using GF.", uses: "To identify parameters vulnerable to SSTI attacks." },
-                    { id: 61, command: "paramspider --domain target.com --output paramspider_output.txt", description: "Finds parameters on a domain using ParamSpider.", uses: "To discover and analyze URL parameters for vulnerabilities." },
-                    { id: 60, command: "gfredirect -u target.com", description: "Finds open redirects using GF.", uses: "To identify potential open redirect vulnerabilities." },
+                    { command: "sqlmap -u \"https://target.com/page.php?id=1\"", description: "SQL injection vulnerability scanner and exploitation tool.", uses: "Detecting and exploiting SQL injection flaws." },
+                    { command: "xsstrike -u \"https://target.com/search?q=FUZZ\"", description: "Cross-Site Scripting (XSS) vulnerability scanner.", uses: "Finding potential XSS vulnerabilities." },
+                    { command: "commix", description: "Automated All-in-One OS Command Injection and Exploitation Tool.", uses: "Detecting and exploiting command injection vulnerabilities." },
+                    { command: "tplmap -u \"https://target.com/page?name=FUZZ\"", description: "Server-Side Template Injection (SSTI) detection and exploitation tool.", uses: "Testing for SSTI vulnerabilities." },
+                    { command: "liffy -u \"https://target.com/image?file=FUZZ\"", description: "Local File Inclusion (LFI) exploitation tool.", uses: "Exploiting LFI vulnerabilities to read system files." },
+                    { command: "wfuzz -c -z file,LFI-payloads.txt -u \"https://target.com/index.php?FUZZ=../../../../etc/passwd\"", description: "Web fuzzer for directory traversal and LFI.", uses: "Brute-forcing LFI paths and filenames." },
+                    { command: "brakeman -p ./webapp", description: "Static analysis security scanner for Ruby on Rails applications.", uses: "Code analysis to find vulnerabilities in Rails apps." },
+                    { command: "bandit -r ./pythonapp", description: "Static analysis security scanner for Python code.", uses: "Analyzing Python code for security issues." },
+                    { command: "braker app.apk", description: "Static analysis security scanner for Android apps.", uses: "Android application vulnerability code review." },
+                    { command: "mobSF", description: "Starts Mobile Security Framework, a mobile app security assessment tool.", uses: "Mobile application (Android/iOS) security testing." }
                 ]
             },
             {
-                category: "Cloud & Network Reconnaissance",
+                category: "Parameter & Payload Fuzzing - Advanced",
                 commands: [
-                    { id: 26, command: "metabigor net --org target.com", description: "Collects network-related information about an organization using Metabigor.", uses: "To gather network data associated with the target organization." },
-                    { id: 31, command: "shodan search hostname:target.com", description: "Searches Shodan for information on the target domain.", uses: "To find exposed services and vulnerabilities related to the domain." },
-                    { id: 32, command: "censys search target.com", description: "Searches Censys for data related to the target domain.", uses: "To find exposed services and security issues." },
-                    { id: 64, command: "cloud_enum -k target.com -l cloud_enum_output.txt", description: "Enumerates cloud services associated with a domain.", uses: "To identify cloud services and their configurations related to the target domain." },
-                    { id: 68, command: "masscan -iL live_hosts.txt -p0-65535 -oX masscan_results.xml", description: "Performs a fast port scan on live hosts using Masscan.", uses: "To identify open ports on live hosts." },
-                    { id: 78, command: "nmap -p- -T4 -A -v target.com", description: "Scans all ports on a target with aggressive detection.", uses: "To perform a comprehensive port scan and service detection." },
-                    { id: 99, command: "netdiscover -r 192.168.1.0/24", description: "Discovers live hosts on a local network.", uses: "To identify devices and their IP addresses within a subnet." },
-                    { id: 100, command: "fping -a -g 192.168.1.0/24", description: "Ping sweep to identify live hosts in a subnet.", uses: "To find active IP addresses within a specified network range." },
-                    { id: 56, command: "mapcidr -silent -cidr target.com -o mapcidr_results.txt", description: "Maps CIDR blocks for a domain.", uses: "To identify IP ranges and network details for the domain." },
-                    { id: 76, command: "cloud_enum -k target.com -l cloud_enum_results.txt", description: "Enumerates cloud services and their configurations.", uses: "To identify and analyze cloud service usage for the target domain." },
+                    { command: "wfuzz -c -w wordlist.txt -u https://target.com/FUZZ -hc 404", description: "Web fuzzer for general brute-forcing.", uses: "Generic web content and functionality fuzzing." },
+                    { command: "ffuf -w parameters.txt -u \"https://target.com/page?FUZZ=value\"", description: "Parameter fuzzing to find hidden URL parameters.", uses: "Discovering non-obvious URL parameters." },
+                    { command: "gf xss | tee xss_params.txt", description: "GF pattern to find potential XSS vulnerable parameters.", uses: "Quickly identify XSS attack surface in URLs." },
+                    { command: "gf sqli | tee sqli_payloads.txt", description: "GF pattern for SQL injection payloads.", uses: "Generating common SQL injection strings." },
+                    { command: "gf lfi | tee lfi_payloads.txt", description: "GF pattern for Local File Inclusion payloads.", uses: "Creating LFI attack strings." },
+                    { command: "gf ssrf | tee ssrf_payloads.txt", description: "GF pattern for Server-Side Request Forgery payloads.", uses: "Generating SSRF attack strings." },
+                    { command: "turbo intruder (Burp Suite extension)", description: "Burp Suite extension for sending large number of HTTP requests.", uses: "High-speed fuzzing and brute-force attacks." },
+                    { command: "intruder (Burp Suite)", description: "Burp Suite Intruder for customized attacks.", uses: "Manual and advanced web request manipulation for fuzzing." },
+                    { command: "OWASP ZAP Fuzzer", description: "Fuzzing capabilities within OWASP ZAP.", uses: "Integrated fuzzing within a security scanner." },
+                    { command: "custom scripts (Python, Bash)", description: "Writing custom scripts for specific fuzzing needs.", uses: "Highly tailored and complex fuzzing scenarios." }
                 ]
             },
             {
-                category: "GitHub & Code Analysis",
+                category: "Cloud Security & Misconfiguration",
                 commands: [
-                    { id: 19, command: "github-search target.com", description: "Searches GitHub for information related to the target domain.", uses: "To find code or other sensitive information related to the domain." },
-                    { id: 20, command: "gitrob -repo target.com", description: "Scans a GitHub repository for sensitive information.", uses: "To identify secrets or sensitive data in GitHub repositories." },
-                    { id: 53, command: "git-secrets --scan", description: "Scans Git repositories for secrets and sensitive data.", uses: "To find and prevent accidental exposure of secrets in code repositories." },
-                    { id: 59, command: "github-dorker -d target.com", description: "Performs GitHub dorking to find sensitive information.", uses: "To search for sensitive data and code related to the target domain." },
-                    { id: 86, command: "gitblit --list-repos", description: "Lists repositories on a GitBlit server.", uses: "To find and analyze repositories on a GitBlit server." },
+                    { command: "aws configure", description: "AWS CLI configuration for interacting with AWS services.", uses: "Setting up AWS CLI for cloud security assessments." },
+                    { command: "aws s3 ls s3://target-bucket", description: "List contents of an AWS S3 bucket (if permissions allow).", uses: "Checking for publicly accessible S3 buckets." },
+                    { command: "gcloud auth login", description: "Google Cloud SDK authentication.", uses: "Authenticating gcloud CLI for GCP assessments." },
+                    { command: "gcloud storage ls gs://target-bucket", description: "List contents of a Google Cloud Storage bucket (if public).", uses: "Checking for publicly accessible GCS buckets." },
+                    { command: "az login", description: "Azure CLI login.", uses: "Authenticating Azure CLI for Azure assessments." },
+                    { command: "az storage container list --account-name targetaccount", description: "List Azure Storage containers (if publicly accessible or with credentials).", uses: "Checking for publicly accessible Azure Storage containers." },
+                    { command: "cloud_enum -k target.com", description: "Enumerates cloud services associated with a domain.", uses: "Identifying cloud infrastructure in use." },
+                    { command: "pacu", description: "Starts Pacu, an AWS exploitation framework.", uses: "Advanced AWS security testing and exploitation." },
+                    { command: "cloudmapper", description: "Starts CloudMapper, tool to visualize cloud infrastructure.", uses: "Visualizing AWS and Azure environments for security review." },
+                    { command: "scoutsuite", description: "Starts Scout Suite, security auditing tool for cloud environments.", uses: "Comprehensive security audits of AWS, Azure, GCP." }
                 ]
             },
             {
-                category: "DNS Enumeration & Analysis",
+                category: "Mobile Application Testing",
                 commands: [
-                    { id: 21, command: "fierce --domain target.com", description: "Performs DNS enumeration using Fierce.", uses: "To discover DNS records and potential subdomains." },
-                    { id: 29, command: "dnsenum target.com", description: "Performs DNS enumeration for a domain.", uses: "To discover DNS records and subdomains." },
-                    { id: 30, command: "dnsrecon -d target.com", description: "Performs DNS reconnaissance for a domain.", uses: "To enumerate DNS records and gather domain-related information." },
-                    { id: 65, command: "gobuster dns -d target.com -t 50 -w wordlist.txt", description: "Performs DNS brute-forcing using Gobuster.", uses: "To discover DNS records and subdomains." },
-                    { id: 67, command: "dnswalk target.com", description: "Walks through DNS records for a domain.", uses: "To gather and analyze DNS records." },
-                    { id: 70, command: "dnsx -l subdomains.txt -resp-only -o dnsx_results.txt", description: "Performs DNS resolution on a list of subdomains using DNSx.", uses: "To resolve DNS records and identify active subdomains." },
-                    { id: 72, command: "puredns resolve subdomains.txt -r resolvers.txt -w puredns_results.txt", description: "Resolves subdomains using PureDNS.", uses: "To identify active subdomains from a list." },
-                    { id: 74, command: "dnsvalidator -t 100 -f resolvers.txt -o validated_resolvers.txt", description: "Validates DNS resolvers using DNSValidator.", uses: "To ensure that DNS resolvers are working correctly and reliably." },
-                    { id: 88, command: "dnsrecon -d target.com -t brt", description: "Performs DNS brute-forcing using DNSRecon.", uses: "To discover additional DNS records and subdomains." },
+                    { command: "adb devices", description: "Android Debug Bridge command to list connected devices.", uses: "Verifying connection to Android devices for testing." },
+                    { command: "adb shell", description: "Opens an interactive shell on an Android device.", uses: "Direct interaction with Android system for analysis." },
+                    { command: "apktool d app.apk", description: "Decompiles an APK file.", uses: "Reverse engineering Android applications." },
+                    { command: "dex2jar classes.dex", description: "Converts DEX files to JAR for Java analysis.", uses: "Converting Android bytecode to Java for easier analysis." },
+                    { command: "jd-gui", description: "Starts Java Decompiler GUI to view JAR contents.", uses: "Viewing Java source code from decompiled JAR files." },
+                    { command: "frida -U -f com.example.app -l script.js", description: "Starts Frida to instrument a mobile app with a Javascript script.", uses: "Dynamic analysis and runtime manipulation of mobile apps." },
+                    { command: "mitmproxy", description: "Starts mitmproxy, an interactive HTTPS proxy.", uses: "Intercepting and analyzing mobile app network traffic." },
+                    { command: "tcpdump -i wlan0 -s 0 -w capture.pcap", description: "Captures network traffic using tcpdump.", uses: "Network traffic analysis of mobile apps." },
+                    { command: "ApkAnalyser", description: "Starts ApkAnalyser, GUI tool for static analysis of Android apps.", uses: "Static analysis and security assessment of APK files." },
+                    { command: "jadx-gui app.apk", description: "Starts jadx-gui, another Android APK decompiler with GUI.", uses: "Decompiling and analyzing Android APKs with a user-friendly interface." }
                 ]
             },
             {
-                category: "Web Application Firewall (WAF) Detection",
+                category: "Network Exploitation & Post-Exploitation",
                 commands: [
-                    { id: 36, command: "wafwoof target.com", description: "Detects Web Application Firewalls (WAF) on a target domain.", uses: "To identify the presence and type of WAF protecting the domain." },
+                    { command: "metasploit", description: "Starts Metasploit Framework.", uses: "Comprehensive exploitation and post-exploitation framework." },
+                    { command: "searchsploit exploit_name", description: "Searches Exploit-DB for public exploits.", uses: "Finding exploits for known vulnerabilities." },
+                    { command: "nmap --script vuln -p445 target", description: "Nmap NSE scripts for vulnerability exploitation.", uses: "Using Nmap for basic exploitation checks." },
+                    { command: "hydra -L users.txt -P pass.txt ssh://target", description: "Password cracker for various services.", uses: "Brute-forcing credentials for services like SSH." },
+                    { command: "john --format=ssh id_rsa.pub", description: "John the Ripper for cracking SSH keys or password hashes.", uses: "Offline password cracking." },
+                    { command: " Responder.py -I eth0 -wrF Responder.log", description: "LLMNR, NBT-NS & MDNS poisoner.", uses: "Credential harvesting via network protocol poisoning." },
+                    { command: "impacket-psexec", description: "Impacket framework for Windows network protocols exploitation.", uses: "Lateral movement and Windows domain penetration testing." },
+                    { command: "mimikatz", description: "Credential dumping tool for Windows (use within a Meterpreter session or on a compromised system).", uses: "Extracting credentials from memory on Windows systems." },
+                    { command: "PowerShell Empire", description: "Starts PowerShell Empire, post-exploitation framework.", uses: "Advanced post-exploitation on Windows environments." },
+                    { command: "evil-winrm -i target -u user -p password", description: "Evil-WinRM, ultimate WinRM shell for hacking/pentesting.", uses: "Efficient WinRM access and post-exploitation." }
                 ]
             },
             {
-                category: "Subdomain Takeover Detection",
+                category: "Reporting & Collaboration",
                 commands: [
-                    { id: 38, command: "subjack -w subdomains.txt -t 20 -o subjack_results.txt", description: "Detects subdomain takeover vulnerabilities using Subjack.", uses: "To identify subdomains vulnerable to takeover attacks." },
-                    { id: 73, command: "ctfr -d target.com -o ctfr_results.txt", description: "Finds and analyzes potential subdomain takeovers using CTFR.", uses: "To detect subdomains vulnerable to takeover." },
-                ]
-            },
-            {
-                category: "WordPress Security Scanning",
-                commands: [
-                    { id: 63, command: "wpscan --url target.com", description: "Scans a WordPress site for vulnerabilities using WPScan.", uses: "To identify vulnerabilities and security issues in WordPress installations." },
-                    { id: 82, command: "wpscan --enumerate u", description: "Enumerates users on a WordPress site.", uses: "To discover user accounts on a WordPress installation." },
-                ]
-            },
-            {
-                category: "Exploitation",
-                commands: [
-                    { id: 101, command: "msfconsole", description: "Starts Metasploit Framework console.", uses: "To launch exploits, auxiliary modules, and manage penetration testing activities." },
-                    { id: 102, command: "nmap -sV --script vuln target.com", description: "Uses Nmap with NSE scripts to scan for known vulnerabilities.", uses: "To quickly identify potential vulnerabilities based on service version detection." },
-                    { id: 103, command: "searchsploit keyword", description: "Searches Exploit-DB for public exploits related to a keyword.", uses: "To find publicly available exploits for known vulnerabilities." },
-                ]
-            },
-            {
-                category: "Reporting & Documentation",
-                commands: [
-                    { id: 104, command: "dradis", description: "Starts Dradis Framework for collaborative reporting.", uses: "To centralize findings and generate reports in a team environment." },
-                    { id: 105, command: "faraday-server", description: "Starts Faraday Vulnerability Management Platform.", uses: "To manage and track vulnerabilities across multiple projects." },
-                    { id: 106, command: " Joplin", description: "Use Joplin (or similar note-taking apps) for documenting findings.", uses: "To keep organized notes and documentation of the bug bounty process." },
+                    { command: "dradis", description: "Starts Dradis Framework for collaborative security reporting.", uses: "Centralized vulnerability and finding management for teams." },
+                    { command: "faraday-server", description: "Starts Faraday Vulnerability Management Platform.", uses: "Vulnerability management and collaboration platform." },
+                    { command: " Joplin", description: "Use Joplin (or similar note-taking apps) for documenting findings.", uses: "Organized note-taking and documentation." },
+                    { command: "cherrytree", description: "Starts CherryTree, hierarchical note-taking application.", uses: "Structured note organization for pentesting projects." },
+                    { command: "metasploit db_export", description: "Metasploit command to export scan and exploit data.", uses: "Exporting Metasploit data for reports." },
+                    { command: "OWASP ZAP report generation", description: "Generate reports from OWASP ZAP scans.", uses: "Creating scan reports from ZAP." },
+                    { command: "Nessus report export", description: "Export reports from Nessus vulnerability scans.", uses: "Generating reports from Nessus." },
+                    { command: "markdown", description: "Use Markdown for writing clear and concise reports.", uses: "Standard format for readable security reports." },
+                    { command: "asciidoc", description: "Use AsciiDoc for more complex and technical documentation.", uses: "Technical documentation and detailed reports." },
+                    { command: " collaborate platforms (Slack, Teams, etc.)", description: "Utilize collaboration tools for team communication and finding sharing.", uses: "Real-time team communication and project management." }
                 ]
             },
             {
                 category: "Utility & Miscellaneous",
                 commands: [
-                    { id: 33, command: "spiderfoot -s target.com -o spiderfoot_report.html", description: "Performs a comprehensive reconnaissance scan using Spiderfoot.", uses: "To generate an in-depth report of the target domain." },
-                    { id: 34, command: "sniper -t target.com", description: "Performs a wide range of scans and reconnaissance tasks using Sniper.", uses: "To conduct thorough reconnaissance on the target domain." },
-                    { id: 44, command: "recon-ng -w workspace -t target.com", description: "Conducts reconnaissance using Recon-ng with a specified workspace.", uses: "To gather and organize reconnaissance data." },
-                    { id: 46, command: "vhost -u target.com -o vhost_results.txt", description: "Detects virtual hosts for a domain.", uses: "To discover virtual hosts and potential misconfigurations." },
-                    { id: 71, command: "waybackpack target.com -d output/", description: "Downloads historical Wayback Machine data.", uses: "To analyze historical versions of a website for potential vulnerabilities." },
-                    { id: 75, command: "httpx -silent -l live_hosts.txt -mc 200 -o httpx_results.txt", description: "Checks for live hosts with HTTP status code 200 using HTTPX.", uses: "To filter and find active web services returning a 200 OK status." },
-                    { id: 80, command: "screenshot-machine -u https://target.com -o screenshot.png", description: "Takes a screenshot of a web page.", uses: "To visually capture the content of a web page." },
-                    { id: 83, command: "burpsuite -d", description: "Starts Burp Suite in daemon mode.", uses: "To run Burp Suite in a background process for automated testing." },
-                    { id: 87, command: "goaccess -f access.log -o report.html", description: "Generates a web report from an access log.", uses: "To analyze and visualize web server access logs." },
-                    { id: 89, command: "wappalyzer https://target.com", description: "Detects technologies used on a website.", uses: "To identify web technologies and frameworks used by the site." },
-                    { id: 95, command: "cloudscraper -u https://target.com", description: "Scrapes data from a website protected by Cloudflare.", uses: "To extract data from websites using Cloudflare protection." },
+                    { command: "tmux", description: "Starts tmux, terminal multiplexer.", uses: "Managing multiple terminal sessions efficiently." },
+                    { command: "screen", description: "Starts screen, another terminal multiplexer.", uses: "Alternative to tmux for terminal session management." },
+                    { command: " jq '.' report.json", description: "Processes JSON data from command-line.", uses: "Parsing and filtering JSON output from tools." },
+                    { command: "grep 'error' logfile.txt", description: "Searches for patterns in files.", uses: "Log analysis and filtering output." },
+                    { command: "sed 's/old/new/g' file.txt", description: "Stream editor for text transformation.", uses: "Text manipulation and data cleaning." },
+                    { command: "awk '{print $1}' file.txt", description: "Text processing tool for data extraction.", uses: "Extracting specific columns or data from text files." },
+                    { command: "curl -I https://target.com", description: "Retrieves headers from a web server.", uses: "Quickly checking server headers and status codes." },
+                    { command: "wget https://target.com/file.txt", description: "Downloads files from web servers.", uses: "Downloading files for analysis or wordlists." },
+                    { command: "python -m SimpleHTTPServer 8000", description: "Starts a simple HTTP server in Python 2.", uses: "Serving files over HTTP for local testing or exploitation." },
+                    { command: "python3 -m http.server 8000", description: "Starts a simple HTTP server in Python 3.", uses: "Serving files over HTTP for local testing or exploitation (Python 3)." }
                 ]
-            },
-            {
-                category: "Security Data Lists & Tools",
-                commands: [
-                    { id: 27, command: "metagoofil -d target.com -t doc,pdf,xls,docx,xlsx,ppt,pptx -l 100", description: "Extracts metadata from documents related to a domain using Metagoofil.", uses: "To discover sensitive information from public documents." },
-                    { id: 28, command: "theharvester -d target.com -l 500 -b all", description: "Gathers email addresses and domain-related information using TheHarvester.", uses: "To collect emails and domain information for reconnaissance." },
-                    { id: 94, command: "theharvester -d target.com -b google", description: "Gathers emails and domain information using Google.", uses: "To collect information about the target domain from Google." },
-                    { id: 84, command: "seclists -a -b -d target.com", description: "Lists security-related data including wordlists and DNS.", uses: "To gather security information and prepare for testing." },
-                    { id: 85, command: "censys search \"target.com\"", description: "Searches Censys for target domain information.", uses: "To find exposed services and vulnerabilities related to the domain." },
-                    { id: 90, command: "seclists -d -a -b target.com", description: "Lists security-related data for the target domain.", uses: "To gather useful data for penetration testing." },
-                    { id: 91, command: "burpsuite --config burp_config.json", description: "Starts Burp Suite with a specified configuration.", uses: "To run Burp Suite with custom settings for testing." },
-                    { id: 93, command: "seclists -t -a -d target.com", description: "Lists security-related data for testing.", uses: "To prepare for penetration testing by gathering relevant data." },
-                ]
-            },
+            }
         ];
 
         function renderCategoryGrid() {
-        const categoriesGrid = document.getElementById('categoriesGrid');
-        categoriesGrid.innerHTML = ''; // Clear any existing content
+            const categoriesGrid = document.getElementById('categoriesGrid');
+            categoriesGrid.innerHTML = ''; // Clear any existing content
 
-        commandList.forEach(category => {
-            const categoryItem = document.createElement('div');
-            categoryItem.className = 'category-item';
-            categoryItem.innerHTML = `<h2>${category.category}</h2>`;
-            categoryItem.addEventListener('click', () => {
-                renderCommandView(category.category);
+            commandList.forEach(category => {
+                const categoryItem = document.createElement('div');
+                categoryItem.className = 'category-item';
+                categoryItem.innerHTML = `<h2>${category.category}</h2>`;
+                categoryItem.addEventListener('click', () => {
+                    renderCommandView(category.category);
+                });
+                categoriesGrid.appendChild(categoryItem);
             });
-            categoriesGrid.appendChild(categoryItem);
-        });
 
-        // Show category grid, hide command view (initial state)
-        document.getElementById('categoriesGrid').style.display = 'grid';
-        document.getElementById('commandCategoryViews').style.display = 'none';
-    }
-
-    function renderCommandView(categoryName) {
-        const commandCategoryViews = document.getElementById('commandCategoryViews');
-        commandCategoryViews.innerHTML = ''; // Clear previous command view
-
-        const category = commandList.find(cat => cat.category === categoryName);
-        if (!category) {
-            console.error("Category not found:", categoryName);
-            return;
+            // Show category grid, hide command view (initial state)
+            document.getElementById('categoriesGrid').style.display = 'grid';
+            document.getElementById('commandCategoryViews').style.display = 'none';
         }
 
-        const categoryView = document.createElement('div');
-        categoryView.className = 'command-category-view';
-        categoryView.style.display = 'block'; // Ensure the view is visible
+        function renderCommandView(categoryName) {
+            const commandCategoryViews = document.getElementById('commandCategoryViews');
+            commandCategoryViews.innerHTML = ''; // Clear previous command view
 
-        // Category Title with Back Button
-        const titleDiv = document.createElement('div');
-        titleDiv.className = 'category-title-view';
-        titleDiv.innerHTML = `${category.category}`;
+            const category = commandList.find(cat => cat.category === categoryName);
+            if (!category) {
+                console.error("Category not found:", categoryName);
+                return;
+            }
 
-        const backButton = document.createElement('button');
-        backButton.className = 'back-button';
-        backButton.innerHTML = '<i class="fas fa-arrow-left"></i> Back to Categories';
-        backButton.onclick = showCategoryGrid; // Go back to category grid
-        titleDiv.appendChild(backButton);
-        categoryView.appendChild(titleDiv);
+            const categoryView = document.createElement('div');
+            categoryView.className = 'command-category-view';
+            categoryView.style.display = 'block'; // Ensure the view is visible
 
-        // Commands List Container
-        const commandsListDiv = document.createElement('div');
-        commandsListDiv.className = 'commands-list';
+            // Category Title with Back Button
+            const titleDiv = document.createElement('div');
+            titleDiv.className = 'category-title-view';
+            titleDiv.innerHTML = `${category.category}`;
 
-        category.commands.forEach(cmd => {
-            const commandDiv = document.createElement('div');
-            commandDiv.className = 'command';
-            commandDiv.innerHTML = `
-                <h3><span>${cmd.id}.</span> <span class="command-text">${cmd.command}</span>
-                    <button class="copy-button" onclick="copyCommand('${cmd.command}')"><i class="fas fa-copy"></i> Copy</button>
-                </h3>
-                <p><strong>Description:</strong> ${cmd.description}</p>
-                <p><strong>Uses:</strong> ${cmd.uses}</p>
-                <div class="command-code">
-                    <code>${cmd.command}</code>
-                </div>
-            `;
-            commandsListDiv.appendChild(commandDiv);
-        });
-        categoryView.appendChild(commandsListDiv);
-        commandCategoryViews.appendChild(categoryView);
+            const backButton = document.createElement('button');
+            backButton.className = 'back-button';
+            backButton.innerHTML = '<i class="fas fa-arrow-left"></i> Back to Categories';
+            backButton.onclick = showCategoryGrid; // Go back to category grid
+            titleDiv.appendChild(backButton);
+            categoryView.appendChild(titleDiv);
 
-        // Hide category grid, show command view
-        document.getElementById('categoriesGrid').style.display = 'none';
-        document.getElementById('commandCategoryViews').style.display = 'block';
-    }
+            // Commands List Container
+            const commandsListDiv = document.createElement('div');
+            commandsListDiv.className = 'commands-list';
 
-    function showCategoryGrid() {
-        renderCategoryGrid();
-    }
+            category.commands.forEach(cmd => {
+                const commandDiv = document.createElement('div');
+                commandDiv.className = 'command';
+                commandDiv.innerHTML = `
+                    <h3><span class="command-text">${cmd.command}</span>
+                        <button class="copy-button" onclick="copyCommand('${cmd.command}')"><i class="fas fa-copy"></i> Copy</button>
+                    </h3>
+                    <p><strong>Description:</strong> ${cmd.description}</p>
+                    <p><strong>Uses:</strong> ${cmd.uses}</p>
+                    <div class="command-code">
+                        <code>${cmd.command}</code>
+                    </div>
+                `;
+                commandsListDiv.appendChild(commandDiv);
+            });
+            categoryView.appendChild(commandsListDiv);
+            commandCategoryViews.appendChild(categoryView);
 
-    function copyCommand(command) {
-        navigator.clipboard.writeText(command).then(() => {
-            alert('Command copied to clipboard!');
-        }).catch(function (err) {
-            console.error('Failed to copy command: ', err);
-            alert('Failed to copy command. Please copy manually.');
-        });
-    }
+            // Hide category grid, show command view
+            document.getElementById('categoriesGrid').style.display = 'none';
+            document.getElementById('commandCategoryViews').style.display = 'block';
+        }
 
-    document.addEventListener('DOMContentLoaded', renderCategoryGrid); // Initial render on page load
-</script>
+        function showCategoryGrid() {
+            renderCategoryGrid();
+        }
+
+        function copyCommand(command) {
+            navigator.clipboard.writeText(command).then(() => {
+                alert('Command copied to clipboard!');
+            }).catch(function (err) {
+                console.error('Failed to copy command: ', err);
+                alert('Failed to copy command. Please copy manually.');
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', renderCategoryGrid); // Initial render on page load
+    </script>
 </body>
 
 </html>
