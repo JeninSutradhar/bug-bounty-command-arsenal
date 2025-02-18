@@ -6,7 +6,7 @@ A comprehensive collection of 100 essential commands for ethical hacking and bug
 ## View Online
 You can view the full documentation and commands on the GitHub Pages site: [Bug Bounty Command Arsenal](https://jeninsutradhar.github.io/bug-bounty-command-arsenal/).
 
-![image](https://github.com/user-attachments/assets/bf2de94f-898e-4982-933d-8b63505ab924)
+![image](https://github.com/user-attachments/assets/7744f6dc-8a9b-41b9-b0d1-37d55a7270d6)
 
 
 ## Usage
